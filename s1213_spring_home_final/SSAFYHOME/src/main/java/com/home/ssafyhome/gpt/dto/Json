@@ -1,0 +1,42 @@
+{
+    "model" : "GPT-3.5 Turbo",
+    "messages: : [
+        {
+            "role" : "system",
+            "content" : {{너는 부동산 추천을 해주는 서비스를 운영하고있어, 유저의 데이터를 최우선으로 고려한뒤 주변 시설의 규모와 거리 및 주택의 가격을 고려해서 최선을 결과를 위해 객관적인 값을 도출하기 위해 노력해주길 바래,
+                          		해당부동산을 대체할 수 있는 주변의 다른 지역과 매물 대해 비교해서 나온 결과를 최대 2개씩만 적어서 줘}}
+        },
+        {
+            "role" : "user",
+            "content" : {{UserData, AptDto, AptDealListDto, InfraListDto }},
+            "name" : {{UserId}}
+        }
+    ],
+    "response_format": {
+        "type": "json_schema",
+        "properties":{
+            "총평": {
+                "type": "String",
+                "enum": ["매우추천","추천","평범","조금아쉬움","다른곳을찾아봐요"]
+            },
+            "고려한 요소": {
+                "type": "array",
+                "keywords": {"type": String}
+            },
+            "긍정적 요소": {
+                "type": "array",
+                "keywords": {"type": HashMap<String, String>}
+            },
+            "부정적 요소": {
+                "type": "array",
+                "keywords": {"type": HashMap<String, String>}
+            },
+            "기타 요소": {
+                "type": "array",
+                "keywords": {"type": HashMap<String, String>}
+            },
+            "required" : ["총평", "긍정적 요소","부정적 요소","기타 요소"]
+        }
+    }
+}
+

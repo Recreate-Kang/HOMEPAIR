@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.home.ssafyhome.apt.mapper.AptMapper">
+
+<select id="selectDealsByAptSeq" parameterType="String" resultType="com.home.ssafyhome.apt.model.AptDeal">
+    SELECT
+        no,
+        apt_seq AS aptSeq,
+        apt_dong AS aptDong,
+        floor,
+        deal_year AS dealYear,
+        deal_month AS dealMonth,
+        deal_day AS dealDay,
+        exclu_use_ar AS excluUseAr,
+        REPLACE(deal_amount, ',', '') AS dealAmount, -- 쉼표 제거 후 문자열 반환
+        ROUND(CAST(REPLACE(deal_amount, ',', '') AS DECIMAL(10, 2)) / exclu_use_ar, 2) AS pricePerArea,
+        STR_TO_DATE(CONCAT(deal_year, '-', deal_month, '-', deal_day), '%Y-%m-%d') AS dealDate
+    FROM
+        housedeals
+    WHERE
+        apt_seq = #{aptSeq}
+    ORDER BY
+        dealDate DESC;
+</select>
+</mapper>

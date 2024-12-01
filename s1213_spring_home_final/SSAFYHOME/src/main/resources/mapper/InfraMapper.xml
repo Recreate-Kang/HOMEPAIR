@@ -1,0 +1,167 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.home.ssafyhome.infra.mapper.InfraMapper">
+    <!-- ResultMap 정의 -->
+    <resultMap id="SHospitalResultMap" type="com.home.ssafyhome.infra.model.Hospital">
+        <id property="keyId" column="key_id"/>
+        <result property="address" column="address"/>
+        <result property="typeCode" column="type_code"/>
+        <result property="typeName" column="type_name"/>
+        <result property="emergencyCode" column="emergency_code"/>
+        <result property="emergencyName" column="emergency_name"/>
+        <result property="emergencyBoolean" column="emergency_boolean"/>
+        <result property="etc" column="etc"/>
+        <result property="detail" column="detail"/>
+        <result property="roughName" column="rough_name"/>
+        <result property="serviceName" column="service_name"/>
+        <result property="phone1" column="phone_1"/>
+        <result property="phone2" column="phone_2"/>
+        <result property="postal1" column="postal_1"/>
+        <result property="postal2" column="postal_2"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="myUnknownColumn" column="MyUnknownColumn"/>
+    </resultMap>
+    <resultMap id="SLibraryResultMap" type="com.home.ssafyhome.infra.model.Library">
+        <result property="serviceName" column="service_name"/>
+        <result property="sidoName" column="sido_name"/>
+        <result property="gunguName" column="gungu_name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="totalBook" column="total_book"/>
+        <result property="addressRoad" column="address_road"/>
+        <result property="organizationName" column="organization_name"/>
+        <result property="phone" column="phone"/>
+        <result property="landArea" column="land_area"/>
+        <result property="buildingArea" column="building_area"/>
+        <result property="homepage" column="homepage"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="lastUpdate" column="last_update"/>
+        <result property="providerCode" column="provider_code"/>
+        <result property="providerName" column="provider_name"/>
+    </resultMap>
+    <resultMap id="SMartResultMap" type="com.home.ssafyhome.infra.model.Mart">
+        <id property="keyId" column="key_id"/>
+        <result property="serviceType" column="service_type"/>
+        <result property="serviceId" column="service_id"/>
+        <result property="governmentCode" column="government_code"/>
+        <result property="managedCode" column="managed_code"/>
+        <result property="licenseDay" column="license_day"/>
+        <result property="statusType" column="status_type"/>
+        <result property="statusName" column="status_name"/>
+        <result property="statusTypeDetail" column="status_type_detail"/>
+        <result property="statusNameDetail" column="status_name_detail"/>
+        <result property="phone" column="phone"/>
+        <result property="landArea" column="land_area"/>
+        <result property="postalCode" column="postal_code"/>
+        <result property="address" column="address"/>
+        <result property="addressRoad" column="address_road"/>
+        <result property="roadnamePostal" column="roadname_postal"/>
+        <result property="serviceName" column="service_name"/>
+        <result property="lastUpdate" column="last_update"/>
+        <result property="updateType" column="update_type"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="workingType" column="working_type"/>
+        <result property="cordinateX" column="cordinate_x"/>
+        <result property="cordinateY" column="cordinate_y"/>
+        <result property="martType" column="mart_type"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+    </resultMap>
+    <resultMap id="SParkResultMap" type="com.home.ssafyhome.infra.model.Park">
+        <id property="manageId" column="manage_id"/>
+        <result property="parkName" column="park_name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="addressRoad" column="address_road"/>
+        <result property="address" column="address"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="landArea" column="land_area"/>
+        <result property="exerciseFacility" column="exercise_facility"/>
+        <result property="amusementFacility" column="amusement_facility"/>
+        <result property="convenientFacility" column="convenient_facility"/>
+        <result property="cultureFacility" column="culture_facility"/>
+        <result property="etcFacility" column="etc_facility"/>
+        <result property="startDate" column="start_date"/>
+        <result property="orgraizationName" column="orgraization_name"/>
+        <result property="phone" column="phone"/>
+        <result property="lastUpdate" column="last_update"/>
+        <result property="providerCode" column="provider_code"/>
+        <result property="providerName" column="provider_name"/>
+    </resultMap>
+    <resultMap id="SSchoolResultMap" type="com.home.ssafyhome.infra.model.School">
+        <id property="keyId" column="key_id"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="schoolLevel" column="school_level"/>
+        <result property="foundationDate" column="foundation_date"/>
+        <result property="foundationType" column="foundation_type"/>
+        <result property="mainBranch" column="main_branch"/>
+        <result property="serviceStatus" column="service_status"/>
+        <result property="address" column="address"/>
+        <result property="addressRoad" column="address_road"/>
+        <result property="governmentCode" column="government_code"/>
+        <result property="governmentName" column="government_name"/>
+        <result property="governmentSubCode" column="government_sub_code"/>
+        <result property="governmentSubName" column="government_sub_name"/>
+        <result property="createdDate" column="created_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="dataServeDate" column="data_serve_date"/>
+        <result property="providerCode" column="provider_code"/>
+        <result property="providerName" column="provider_name"/>
+    </resultMap>
+    <resultMap id="SSubwayResultMap" type="com.home.ssafyhome.infra.model.Subway">
+        <id property="keyId" column="key_id"/>
+        <result property="subwayName" column="subway_name"/>
+        <result property="subwayLine" column="subway_line"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+    </resultMap>
+
+    <select id="findHospitalInRange" resultMap="SHospitalResultMap">
+        SELECT *
+        FROM s_hospital
+        WHERE latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+          AND type_code IN ('A', 'B')
+    </select>
+
+    <select id="findLibraryInRange" resultMap="SLibraryResultMap">
+        SELECT *
+        FROM s_library
+        WHERE latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+    </select>
+
+    <select id="findMartInRange" resultMap="SMartResultMap">
+        SELECT *
+        FROM s_mart
+        WHERE latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+    </select>
+
+    <select id="findParkInRange" resultMap="SParkResultMap">
+        SELECT *
+        FROM s_park
+        WHERE latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+    </select>
+
+    <select id="findSchoolInRange" resultMap="SSchoolResultMap">
+        SELECT *
+        FROM s_school
+        WHERE latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+    </select>
+
+    <select id="findSubwayInRange" resultMap="SSubwayResultMap">
+        SELECT *
+        FROM s_subway
+        WHERE latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.home.ssafyhome.user.mapper.UserFavoritesMapper">
+
+    <!-- Insert -->
+    <insert id="insertUserFavorite" parameterType="com.home.ssafyhome.user.model.UserFavorites">
+        INSERT INTO user_favorites (user_id, apt_seq, my_place_name, created_at)
+        VALUES (#{userId}, #{aptSeq}, #{myPlaceName}, #{createdAt})
+    </insert>
+
+    <!-- Select All -->
+    <select id="selectAllUserFavorites" resultMap="UserFavoritesResultMap">
+        SELECT favorite_id, user_id, apt_seq, my_place_name, created_at
+        FROM user_favorites
+    </select>
+
+    <!-- Select By User ID -->
+    <select id="selectUserFavoritesByUserId" parameterType="int" resultMap="UserFavoritesResultMap">
+        SELECT favorite_id, user_id, apt_seq, my_place_name, created_at
+        FROM user_favorites
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- Update Specific Fields (Update by User ID and my_place_name = 'HOME') -->
+    <update id="updateUserFavoriteHome" parameterType="com.home.ssafyhome.user.model.UserFavorites">
+        UPDATE user_favorites
+        SET
+            apt_seq = #{aptSeq},
+            created_at = COALESCE(#{createdAt}, now())
+        WHERE user_id = #{userId} AND my_place_name = 'HOME'
+    </update>
+
+    <!-- Delete -->
+    <delete id="deleteUserFavoriteById" parameterType="int">
+        DELETE FROM user_favorites WHERE favorite_id = #{favoriteId}
+    </delete>
+
+    <!-- ResultMap Definition -->
+    <resultMap id="UserFavoritesResultMap" type="com.home.ssafyhome.user.model.UserFavorites">
+        <id property="favoriteId" column="favorite_id" />
+        <result property="userId" column="user_id" />
+        <result property="aptSeq" column="apt_seq" />
+        <result property="myPlaceName" column="my_place_name" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+
+</mapper>

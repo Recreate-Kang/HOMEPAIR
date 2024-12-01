@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.home.ssafyhome.code.mapper.DongCodesMapper">
+
+    <!-- ResultMap 정의 -->
+    <resultMap id="DongCodesResultMap" type="com.home.ssafyhome.code.model.DongCodes">
+        <id property="dongCode" column="dong_code"/>
+        <result property="sidoName" column="sido_name"/>
+        <result property="gugunName" column="gugun_name"/>
+        <result property="dongName" column="dong_name"/>
+    </resultMap>
+    <resultMap id="GugunCodesResultMap" type="com.home.ssafyhome.code.model.GugunCodes">
+        <result property="code" column="code"/>
+        <result property="sidoName" column="sido_name"/>
+        <result property="gugunName" column="gugun_name"/>
+    </resultMap>
+    <!-- 모든 동 코드를 조회하는 쿼리 -->
+    <select id="findAll" resultMap="DongCodesResultMap">
+        SELECT *
+        FROM dongcodes
+    </select>
+    <select id="findGugunCodes" resultMap="GugunCodesResultMap">
+        SELECT left(t.dong_code, 5) as code, t.sido_name, t.gugun_name
+        FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY gugun_name ORDER BY dong_code ASC) AS row_num
+              FROM dongcodes) t
+        WHERE row_num = 1;
+    </select>
+
+</mapper>

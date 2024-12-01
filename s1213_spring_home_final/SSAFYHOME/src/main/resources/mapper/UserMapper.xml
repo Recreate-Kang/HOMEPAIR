@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.home.ssafyhome.auth.mapper.AuthMapper">
+
+    <!-- ResultMap 정의 -->
+    <resultMap id="UserResultMap" type="com.home.ssafyhome.auth.model.User">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="userIdValue" column="userid"/>
+        <result property="userpw" column="userpw"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="role" column="role"/>
+    </resultMap>
+
+    <!-- 사용자 ID와 비밀번호로 사용자 찾기 -->
+    <select id="findByUserIdValueAndUserpw" parameterType="map" resultMap="UserResultMap">
+        SELECT user_id,
+               username,
+               userid,
+               userpw,
+               email,
+               phone_number,
+               role
+        FROM users
+        WHERE userid = #{userId}
+          AND userpw = #{password}
+    </select>
+    <!-- 사용자 추가 -->
+    <insert id="insertUser" parameterType="com.home.ssafyhome.auth.model.User">
+        INSERT INTO users (user_id, username, userid, userpw, email, phone_number, role)
+        VALUES (#{userId}, #{username}, #{userIdValue}, #{userpw}, #{email}, #{phoneNumber}, #{role})
+    </insert>
+</mapper>

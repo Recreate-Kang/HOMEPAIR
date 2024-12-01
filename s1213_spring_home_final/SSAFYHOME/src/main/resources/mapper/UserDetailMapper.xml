@@ -1,0 +1,61 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.home.ssafyhome.user.mapper.UserDetailsMapper">
+    <resultMap id="UserDetailsResultMap" type="com.home.ssafyhome.user.model.UserDetails">
+        <id property="userId" column="user_id" />
+        <result property="age" column="age" />
+        <result property="gender" column="gender" />
+        <result property="occupation" column="occupation" />
+        <result property="hobbies" column="hobbies" />
+        <result property="maritalStatus" column="marital_status" />
+        <result property="currentArea" column="current_area" />
+        <result property="hasPets" column="has_pets" jdbcType="VARCHAR" />
+        <result property="bio" column="bio" />
+        <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <!-- Insert -->
+    <insert id="insertUserDetails" parameterType="com.home.ssafyhome.user.model.UserDetails">
+        INSERT INTO user_details (user_id, age, gender, occupation, hobbies, marital_status, current_area, has_pets, bio, updated_at)
+        VALUES (#{userId}, #{age}, #{gender}, #{occupation}, #{hobbies}, #{maritalStatus}, #{currentArea}, #{hasPets,jdbcType=VARCHAR}, #{bio}, #{updatedAt})
+    </insert>
+
+    <!-- Select All -->
+    <select id="selectAllUserDetails" resultMap="UserDetailsResultMap">
+        SELECT
+            user_id, age, gender, occupation, hobbies, marital_status, current_area,
+            has_pets, bio, updated_at
+        FROM user_details
+    </select>
+
+    <!-- Select By User ID -->
+    <select id="selectUserDetailsByUserId" parameterType="int" resultMap="UserDetailsResultMap">
+        SELECT
+            user_id, age, gender, occupation, hobbies, marital_status, current_area,
+            has_pets, bio, updated_at
+        FROM user_details
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- Update Specific Fields (Partial Update) -->
+    <update id="updateUserDetails" parameterType="com.home.ssafyhome.user.model.UserDetails">
+        UPDATE user_details
+        SET
+            age = COALESCE(#{age}, age),
+            gender = COALESCE(#{gender}, gender),
+            occupation = COALESCE(#{occupation}, occupation),
+            hobbies = COALESCE(#{hobbies}, hobbies),
+            marital_status = COALESCE(#{maritalStatus}, marital_status),
+            current_area = COALESCE(#{currentArea}, current_area),
+            has_pets = COALESCE(#{hasPets,jdbcType=VARCHAR}, has_pets),
+            bio = COALESCE(#{bio}, bio),
+            updated_at = COALESCE(#{updatedAt}, updated_at)
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- Delete -->
+    <delete id="deleteUserDetailsById" parameterType="int">
+        DELETE FROM user_details WHERE detail_id = #{detailId}
+    </delete>
+</mapper>

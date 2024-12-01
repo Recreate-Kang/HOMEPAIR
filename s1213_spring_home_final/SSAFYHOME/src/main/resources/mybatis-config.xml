@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 예: 필드 이름과 컬럼 이름을 매핑할 때 언더스코어를 무시하고 CamelCase 변환 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!-- 캐시 설정 -->
+    <typeAliases>
+        <typeAlias type="com.home.ssafyhome.apt.entity.AptInfo" alias="AptInfo"/>
+    </typeAliases>
+
+    <mappers>
+        <!-- 각 매퍼 파일을 명시하거나 패키지로 지정 가능 -->
+        <mapper resource="mapper/AptInfoMapper.xml"/>
+    </mappers>
+</configuration>
