@@ -27,7 +27,7 @@ jobs:
           java-version: '17'
 
       - name: Grant execute permission for Gradle
-        run: chmod +x SSAFYHOME/backend/gradlew
+        run: chmod +x SSAFYHOME/gradlew
 
       - name: Build and Test
         run: |
@@ -48,7 +48,7 @@ jobs:
           java-version: '17'
 
       - name: Grant execute permission for Gradle
-        run: chmod +x SSAFYHOME/backend/gradlew
+        run: chmod +x SSAFYHOME/gradlew
 
       - name: Build without Test
         run: |
@@ -60,7 +60,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          cd SSAFYHOME/backend
+          cd SSAFYHOME/
           docker build -t myapp-backend:latest .
 
       - name: Push Docker Image
