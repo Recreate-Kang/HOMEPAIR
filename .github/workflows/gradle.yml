@@ -3,12 +3,12 @@ name: Backend CI
 on:
   push:
     paths:
-      - 'SSAFYHOME/**'
+      - 's1213_spring_home_final/SSAFYHOME/**'
     branches:
       - main
   pull_request:
     paths:
-      - 'SSAFYHOME/**'
+      - 's1213_spring_home_final/SSAFYHOME/**'
     branches:
       - main
 
