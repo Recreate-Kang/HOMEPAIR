@@ -4,7 +4,7 @@ package com.home.ssafyhome;
 public class ExecutionTimeAspect {
 
     public Object logExecutionTime(org.aspectj.lang.ProceedingJoinPoint joinPoint) throws Throwable {
-        long startTime = System.currentTimeMillis(); // 시작 시간 기록 한번더
+        long startTime = System.currentTimeMillis(); // 시작 시간 기록 한번더 두번더
         try {
             return joinPoint.proceed(); // 실제 메서드 실행
         } finally {
