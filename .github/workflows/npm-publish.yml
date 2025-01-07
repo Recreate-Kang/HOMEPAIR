@@ -3,12 +3,12 @@ name: Frontend CI
 on:
   push:
     paths:
-      - 'SSAFYHOME_Final_Vue/**'  # frontend 디렉터리 내 변경 시 실행
+      - 's1213_spring_home_final/SSAFYHOME_Final_Vue/**'  # frontend 디렉터리 내 변경 시 실행
     branches:
       - main
   pull_request:
     paths:
-      - 'SSAFYHOME_Final_Vue/**'
+      - 's1213_spring_home_final/SSAFYHOME_Final_Vue/**'
     branches:
       - main
 
