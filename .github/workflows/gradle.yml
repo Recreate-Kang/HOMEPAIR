@@ -19,16 +19,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Grant execute permission for Gradle
+        run: chmod +x SSAFYHOME/backend/gradlew
+
       - name: Build and Test
         run: |
-          cd backend
+          cd SSAFYHOME/backend
           ./gradlew build
 
   push-deploy:
@@ -37,27 +40,30 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Grant execute permission for Gradle
+        run: chmod +x SSAFYHOME/backend/gradlew
+
       - name: Build without Test
         run: |
-          cd backend
+          cd SSAFYHOME/backend
           ./gradlew build -x test
-      
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Build Docker Image
         run: |
-          cd backend
+          cd SSAFYHOME/backend
           docker build -t myapp-backend:latest .
-      
+
       - name: Push Docker Image
         run: |
           docker tag myapp-backend user/myapp-backend:latest
           docker push user/myapp-backend:latest
-
-      - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v4
