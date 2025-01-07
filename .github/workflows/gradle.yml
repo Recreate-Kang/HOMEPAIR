@@ -27,11 +27,11 @@ jobs:
           java-version: '17'
 
       - name: Grant execute permission for Gradle
-        run: chmod +x SSAFYHOME/gradlew
+        run: chmod +x s1213_spring_home_final/SSAFYHOME/gradlew
 
       - name: Build and Test
         run: |
-          cd SSAFYHOME/backend
+          cd s1213_spring_home_final/SSAFYHOME/backend
           ./gradlew build
 
   push-deploy:
@@ -48,11 +48,11 @@ jobs:
           java-version: '17'
 
       - name: Grant execute permission for Gradle
-        run: chmod +x SSAFYHOME/gradlew
+        run: chmod +x s1213_spring_home_final/SSAFYHOME/gradlew
 
       - name: Build without Test
         run: |
-          cd SSAFYHOME/backend
+          cd s1213_spring_home_final/SSAFYHOME/backend
           ./gradlew build -x test
 
       - name: Log in to Docker Hub
@@ -60,7 +60,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          cd SSAFYHOME/
+          cd s1213_spring_home_final/SSAFYHOME/
           docker build -t myapp-backend:latest .
 
       - name: Push Docker Image
