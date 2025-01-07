@@ -1,0 +1,72 @@
+name: Frontend CI
+
+on:
+  push:
+    paths:
+      - 'SSAFYHOME_Final_Vue/**'  # frontend 디렉터리 내 변경 시 실행
+    branches:
+      - main
+  pull_request:
+    paths:
+      - 'SSAFYHOME_Final_Vue/**'
+    branches:
+      - main
+
+jobs:
+  pr-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend  # 기본 작업 디렉터리 설정
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint and Test
+        run: |
+          npm run lint
+          npm run test:unit
+      
+      - name: Build Project
+        run: npm run build
+
+  push-deploy:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Vue App
+        run: npm run build
+
+      - name: Build Docker Image
+        run: |
+          docker build -t myapp-frontend:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker tag myapp-frontend user/myapp-frontend:latest
+          docker push user/myapp-frontend:latest
