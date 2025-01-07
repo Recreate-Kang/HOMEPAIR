@@ -1,11 +1,8 @@
 package com.home.ssafyhome;
 
 
-//@org.aspectj.lang.annotation.Aspect
-//@org.springframework.stereotype.Component
 public class ExecutionTimeAspect {
 
-    //@org.aspectj.lang.annotation.Around("execution(* com.*.*.*.controller..*(..))") // 컨트롤러 패키지 경로 지정
     public Object logExecutionTime(org.aspectj.lang.ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis(); // 시작 시간 기록
         try {
