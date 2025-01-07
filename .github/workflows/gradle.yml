@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and Test
         run: |
-          cd s1213_spring_home_final/SSAFYHOME/backend
+          cd s1213_spring_home_final/SSAFYHOME
           ./gradlew build
 
   push-deploy:
@@ -52,7 +52,7 @@ jobs:
 
       - name: Build without Test
         run: |
-          cd s1213_spring_home_final/SSAFYHOME/backend
+          cd s1213_spring_home_final/SSAFYHOME
           ./gradlew build -x test
 
       - name: Log in to Docker Hub
