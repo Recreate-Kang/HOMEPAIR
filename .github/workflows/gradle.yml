@@ -1,9 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 name: Backend CI
 
 on:
@@ -59,14 +53,11 @@ jobs:
         run: |
           cd backend
           docker build -t myapp-backend:latest .
-
+      
       - name: Push Docker Image
         run: |
           docker tag myapp-backend user/myapp-backend:latest
           docker push user/myapp-backend:latest
 
-
-    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-    # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v4
