@@ -1,0 +1,4 @@
+*.vue linguist-generated
+*.css linguist-generated
+*.js linguist-generated
+*.jsx linguist-generated
